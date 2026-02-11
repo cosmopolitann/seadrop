@@ -10,6 +10,8 @@ contract ERC721SeaDropCloneFactory {
     address public constant DEFAULT_SEADROP =
         0x00005EA00Ac477B1030CE78506496e8C2dE24bf5;
 
+    event CloneCreated(address indexed clone);
+
     constructor() {
         ERC721SeaDropCloneable impl = new ERC721SeaDropCloneable();
         impl.initialize("", "", new address[](0), address(this));
@@ -39,6 +41,7 @@ contract ERC721SeaDropCloneFactory {
             allowedSeaDrop,
             msg.sender
         );
+        emit CloneCreated(instance);
         return instance;
     }
 }
